@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up | GigHub</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/website_logo.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="./css/register_work.css" />
+  </head>
+  <body>
+    <header
+      class="d-flex align-items-center justify-content-between position-fixed top-0"
+    >
+      <a href="./index.html" class="d-flex align-items-center">
+        <img src="./assets/header_logo.png" alt="logo" />
+      </a>
+      <a href="./login.html" class="register-link text-decoration-none fw-bold">
+        <span>Already registered?</span>
+        <span class="sign-up-link">&nbsp;Sign in&nbsp;</span
+        ><span>here</span></a
+      >
+    </header>
+    <content class="d-flex flex-column gap-3 align-items-center py-5">
+      <div class="cta fw-bold w-75">
+        Embark on Your <span>Work</span>&nbsp;<br />Journey: Start Here!
+      </div>
+      <form
+        id="regForm"
+        action=""
+        class="rounded-4 shadow py-4 px-5 d-flex flex-column align-items-center"
+      >
+        <!-- <h5 class="fw-bold w-100 mb-3">Work Status</h5>
+
+        <div class="d-flex w-100 justify-content-evenly flex-wrap gap-3">
+          <input type="radio" id="experienced" name="workStatus" />
+          <label
+            for="experienced"
+            class="workStatus justify-content-center rounded-3 p-3 d-flex align-items-center gap-3"
+          >
+            <div class="selected">
+              <iconify-icon icon="icon-park-solid:check-one"></iconify-icon>
+            </div>
+            <div>
+              <h5 class="fw-bold">I’m Experienced</h5>
+              I have work experience
+            </div>
+            <div>
+              <img src="./assets/JannaA.png" class="rounded-circle shadow" />
+            </div>
+          </label>
+
+          <input type="radio" id="fresher" name="workStatus" />
+
+          <label
+            for="fresher"
+            class="workStatus justify-content-center rounded-3 p-3 d-flex align-items-center gap-3"
+          >
+            <div class="selected">
+              <iconify-icon icon="icon-park-solid:check-one"></iconify-icon>
+            </div>
+            <div>
+              <h5 class="fw-bold">I’m a Fresher</h5>
+              Student/Fresh Graduate
+            </div>
+            <div>
+              <img src="./assets/JannaA.png" class="rounded-circle shadow" />
+            </div>
+          </label>
+        </div>
+
+        <div class="prev w-100 mt-4 d-flex">
+          <div class="prev_item">
+            <label for="prev_work" class="w-100 form_labels fw-bold"
+              >Previous Work</label
+            >
+            <input
+              type="text"
+              name="prev_work"
+              id="prev_work"
+              class="rounded-2 px-2 py-1 w-100"
+            />
+            <div class="msg ps-1 prev_work_msg">
+              This field cannot be empty.
+            </div>
+          </div>
+
+          <div class="prev_item">
+            <label for="position_work" class="w-100 form_labels fw-bold">
+              Position
+            </label>
+            <input
+              type="text"
+              name="position_work"
+              id="position_work"
+              class="rounded-2 px-2 py-1 w-100"
+            />
+            <div class="msg ps-1 position_work_msg">
+              This field cannot be empty.
+            </div>
+          </div>
+
+          <div class="prev_item">
+            <label for="company_work" class="w-100 form_labels fw-bold">
+              Company
+            </label>
+            <input
+              type="text"
+              name="company_work"
+              id="company_work"
+              class="rounded-2 px-2 py-1 w-100"
+            />
+            <div class="msg ps-1 company_work_msg">
+              This field cannot be empty.
+            </div>
+          </div>
+        </div> -->
+
+        <label for="skills" class="w-100 form_labels fw-bold mt-1"
+          >Skills</label
+        >
+        <div type="text" id="skills" class="px-2 pt-1 pb-2 w-100 mb-2"></div>
+        <!-- <div class="msg ps-1 skills_msg w-100">This field cannot be empty.</div> -->
+        <small id="suggestedSkills" class="w-100">SUGGESTED SKILLS</small>
+        <div class="d-flex flex-wrap gap-2 w-100 tags_list">
+          <div class="tags rounded-pill py-1 px-3">
+            Good Communication
+            <span>
+              <iconify-icon icon="iconamoon:close-bold"></iconify-icon>
+            </span>
+          </div>
+          <div class="tags rounded-pill py-1 px-3">
+            Punctual
+            <span>
+              <iconify-icon icon="iconamoon:close-bold"></iconify-icon>
+            </span>
+          </div>
+          <div class="tags rounded-pill py-1 px-3">
+            Team Player
+            <span>
+              <iconify-icon icon="iconamoon:close-bold"></iconify-icon>
+            </span>
+          </div>
+        </div>
+        <div class="mt-3">
+          <input
+            type="text"
+            id="newTagInput"
+            placeholder="Enter new skill "
+            class="rounded-2 px-2 py-1"
+          />
+          <a id="createTagBtn" class="px-3 py-1 rounded-3 text-decoration-none"
+            >Add Skill</a
+          >
+        </div>
+
+        <!-- <div class="jobNLang d-flex w-100 mt-2">
+          <div class="item_2">
+            <label for="job_pref" class="form_labels fw-bold w-100 mt-1">
+              Job Preferences
+            </label>
+            <div class="ddown d-flex align-items-center rounded-2 px-2 py-1">
+              <input
+                type="text"
+                id="job_pref"
+                class="flex-grow-1"
+                readonly="readonly"
+              />
+              <iconify-icon icon="mingcute:down-fill"></iconify-icon>
+            </div>
+            <div class="msg ps-1 job_pref_msg w-100">
+              This field cannot be empty.
+            </div>
+            <div class="ddown_options position-absolute rounded-3 shadow">
+              <div class="ddown_opt px-2 rounded-2 mx-2 my-1">Any</div>
+              <div class="ddown_opt px-2 rounded-2 mx-2 my-1">Part Time</div>
+              <div class="ddown_opt px-2 rounded-2 mx-2 my-1">Full Time</div>
+            </div>
+          </div>
+          <div class="item_2">
+            <label for="language" class="form_labels fw-bold w-100 mt-1">
+              Language
+            </label>
+            <input
+              type="text"
+              id="language"
+              class="rounded-2 px-2 py-1 w-100"
+              placeholder="e.g. Nihongo"
+            />
+            <div class="msg ps-1 language_msg w-100">
+              This field cannot be empty.
+            </div>
+          </div>
+        </div>
+
+        <label for="tellUsMore" class="form_labels fw-bold w-100 mt-1">
+          Tell us more about yourself!</label
+        >
+        <textarea
+          name="tellUsMore"
+          id="tellUsMore"
+          cols="30"
+          rows="5"
+          class="w-100 px-2 py-1 rounded-2"
+        ></textarea>
+        <div class="msg ps-1 tellUsMore_msg w-100">
+          This field cannot be empty.
+        </div>
+
+        <label for="resume" class="form_labels fw-bold w-100 mt-1">
+          Resume
+        </label>
+        <label
+          for="resume"
+          class="file_click rounded-pill d-flex gap-3 align-items-center pe-4"
+        >
+          <span class="rounded-pill py-2 px-4 fw-bold"> UPLOAD FILE </span>
+          <small>DOC, DOCx, PDF, RTF</small>
+        </label>
+        <input
+          type="file"
+          id="resume"
+          accept=".doc, .docx, .pdf,
+        .rtf"
+          onchange="displayFileName()"
+        /> -->
+
+        <a
+          class="submit-form text-decoration-none rounded-pill px-4 py-1 fw-bold align-self-end"
+        >
+          Confirm
+        </a>
+      </form>
+    </content>
+    <!-- <script src="./js/workStatus.js"></script> -->
+    <!-- <script src="./js/jobPref_ddown.js"></script> -->
+    <script src="./js/tags.js"></script>
+    <script src="./js/register_work_formValidate.js"></script>
+  </body>
+</html>
