@@ -17,7 +17,9 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="./css/template.css" />
     <link rel="stylesheet" href="./css/provider_dashboard.css" />
   </head>
   <body>
@@ -31,7 +33,9 @@
 
       <div class="d-flex flex-column flex-grow-1 justify-content-between">
         <div class="tabs_list d-flex flex-column">
-          <div class="tabs d-flex align-items-center gap-1 px-3 py-1 rounded-2">
+          <div
+            class="tabs d-flex align-items-center gap-1 px-3 py-1 rounded-2 active"
+          >
             <iconify-icon icon="ic:round-dashboard"></iconify-icon>
             <span>Dashboard Employer</span>
           </div>
@@ -99,20 +103,188 @@
         <div class="greetings fw-bold lh-sm">
           Good Day!
           <br />
-          <span>Nicole Santos</span>
+          <span>{{user.fName}} {{user.lName}}</span>
         </div>
       </div>
     </header>
-    <content></content>
+    <content class="p-4 pb-5">
+      <h3>Overview</h3>
+      <div class="d-flex flex-wrap gap-3 justify-content-center mt-3">
+        <div
+          class="stat app px-3 py-3 shadow rounded-3 d-flex align-items-center"
+        >
+          <iconify-icon icon="icon-park-solid:click"></iconify-icon>
+          <div class="lh-sm">
+            <div class="count fw-bold">120</div>
+            <div class="categ">Applications</div>
+          </div>
+        </div>
+        <div
+          class="stat act px-3 py-3 shadow rounded-3 d-flex align-items-center"
+        >
+          <iconify-icon icon="ant-design:eye-filled"></iconify-icon>
+          <div class="lh-sm">
+            <div class="count fw-bold">120</div>
+            <div class="categ">Active Postings</div>
+          </div>
+        </div>
+        <div
+          class="stat pend px-3 py-3 shadow rounded-3 d-flex align-items-center"
+        >
+          <iconify-icon icon="ic:twotone-pending-actions"></iconify-icon>
+          <div class="lh-sm">
+            <div class="count fw-bold">120</div>
+            <div class="categ">Pending Approvals</div>
+          </div>
+        </div>
+        <div
+          class="stat exp px-3 py-3 shadow rounded-3 d-flex align-items-center"
+        >
+          <iconify-icon icon="ri:pass-expired-fill"></iconify-icon>
+          <div class="lh-sm">
+            <div class="count fw-bold">120</div>
+            <div class="categ">Expired Postings</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col2 d-flex gap-3">
+        <div class="flex-grow-1">
+          <h3 class="mt-5 mb-3">Recent Activity</h3>
+          <div
+            class="container d-flex align-items-center justify-content-center activities_list px-3 shadow rounded-3"
+          >
+            <div class="hact w-100">
+              <div class="activity d-flex align-items-center gap-2">
+                <iconify-icon icon="icon-park-solid:click"></iconify-icon>
+                <div class="activity_notif">
+                  <span> “Software Engineer”</span> posting is
+                  <span>Pending for Approval</span>
+                </div>
+              </div>
+              <div class="activity d-flex align-items-center gap-2">
+                <iconify-icon icon="icon-park-solid:click"></iconify-icon>
+                <div class="activity_notif">
+                  <span> “Programmer”</span> posting
+                  <span>Received an Application</span>
+                </div>
+              </div>
+              <div class="activity d-flex align-items-center gap-2">
+                <iconify-icon icon="icon-park-solid:click"></iconify-icon>
+                <div class="activity_notif">
+                  <span> “Graphic Designer”</span> posting has
+                  <span>Expired</span>
+                </div>
+              </div>
+              <div class="activity d-flex align-items-center gap-2">
+                <iconify-icon icon="icon-park-solid:click"></iconify-icon>
+                <div class="activity_notif">
+                  <span> “Programmer”</span> posting
+                  <span>Received an Application</span>
+                </div>
+              </div>
+              <div class="activity d-flex align-items-center gap-2">
+                <iconify-icon icon="icon-park-solid:click"></iconify-icon>
+                <div class="activity_notif">
+                  <span> “Graphic Designer”</span> posting has
+                  <span>Expired</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="mt-5 mb-3">Application Overview</h3>
+          <div
+            class="container pie d-flex justify-content-center align-items-center p-3 shadow rounded-3"
+          >
+            <canvas id="application_overview"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="mt-5 mb-3">Company A’s Job Posting Overview</h3>
+      <div
+        class="container line d-flex justify-content-center p-3 shadow rounded-3"
+      >
+        <canvas id="jobPosting_overview"></canvas>
+      </div>
+    </content>
 
     <script>
       $(document).ready(function () {
+        if ($(window).width() <= 800) {
+          $("sidebar").toggleClass("collapsed");
+          $(".tabs span").toggleClass("collapsed");
+          $("content").toggleClass("expand");
+          $("header").toggleClass("expand");
+        }
         $(".burger").click(function () {
           $("sidebar").toggleClass("collapsed");
           $(".tabs span").toggleClass("collapsed");
           $("content").toggleClass("expand");
           $("header").toggleClass("expand");
         });
+      });
+    </script>
+    <script>
+      const ctx = document.getElementById("application_overview");
+
+      new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: ["Pending", "Accepted", "Reviewed", "Rejected"],
+          datasets: [
+            {
+              data: [42, 18, 37, 9],
+              backgroundColor: ["#008080", "#2f88da", "#001f3f", "#b3b3dc"],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+      const jpo = document.getElementById("jobPosting_overview");
+
+      new Chart(jpo, {
+        type: "line",
+        data: {
+          labels: ["Pending", "Accepted", "Reviewed", "Rejected"],
+          datasets: [
+            {
+              label: "Job Posting Overview",
+              data: [42, 18, 37, 9],
+              backgroundColor: ["#008080", "#2f88da", "#001f3f", "#b3b3dc"],
+              borderWidth: 5,
+              tension: 0.5,
+            },
+          ],
+        },
+        options: {
+          // animations: {
+          //   tension: {
+          //     duration: 1000,
+          //     easing: "linear",
+          //     from: 1,
+          //     to: 0, 
+          //     loop: true,
+          //   },
+          // },
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
       });
     </script>
   </body>
