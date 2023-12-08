@@ -19,6 +19,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  user-select: none;
 }
 body {
   font-family: var(--lexend);
@@ -159,6 +160,12 @@ sidebar.collapsed ~ header .burger {
   color: var(--black);
   font-weight: normal;
 }
+
+@media screen and (max-width: 900px) {
+  .greetings {
+    display: none;
+  }
+}
 .tabs_list {
   gap: 1rem;
 }
@@ -166,7 +173,7 @@ sidebar.collapsed ~ header .burger {
   font-size: 1.1rem;
   cursor: pointer;
 }
-.tabs:hover,
+sidebar:not(sidebar.collapsed) .tabs:hover,
 .tabs.active {
   background-color: var(--topaz);
   transition: var(--transition-1);
